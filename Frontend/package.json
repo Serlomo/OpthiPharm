@@ -1,0 +1,36 @@
+{
+  "name": "app02-gestor-personas",
+  "version": "1.0.0",
+  "description": "Gestor de Personas",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "nodemon": "nodemon --exec npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fhernd/Electron-Curso.git"
+  },
+  "keywords": [
+    "electron",
+    "aplicación",
+    "escritorio",
+    "desktop",
+    "multiplataforma"
+  ],
+  "author": "John Ortiz Ordoñez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fhernd/Electron-Curso/issues"
+  },
+  "homepage": "https://github.com/Fhernd/Electron-Curso#readme",
+  "devDependencies": {
+    "electron": "^8.2.0"
+  },
+  "dependencies": {
+    "electron-fetch": "^1.7.3",
+    "electron-reload": "^1.5.0",
+    "mdb-ui-kit": "^3.3.0",
+    "nedb": "^1.8.0"
+  }
+}
