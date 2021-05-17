@@ -2,6 +2,8 @@ const most = document.getElementById("most");
 const btnBus = document.getElementById("btn-bus");
 const registros = document.querySelector("#registros");
 
+const quan = document.getElementById("quantitat");
+
 let Array_Medicamentos = [];
 let Array_NomMedica = [];
 
@@ -109,8 +111,11 @@ function autocomplete(inp, arr) {
       const object = Array_Medicamentos[res_bus];
       most.innerHTML = "";
 
-      most.innerHTML += `<div class="card" style="width: 50rem;">
-    <h5 class="card-title">${object.name}</h5> 
+      most.innerHTML += `<div class="card" >
+      <div class="card-header">
+      ${object.name}
+    </div>
+    <h5 class="card-title"></h5> 
     <p class="card-text">${object.des}</p> 
     <h6>Preu: ${object.price} </h6> 
      <input type="button" class="btn btn-outline-success"  onclick="afegirComanda('${res_bus}');" value="Afegira a la comanda">
@@ -127,7 +132,7 @@ function borraBusqueda() {
 
 let comanda = [];
 let id_rep = [];
-const quan = document.getElementById("quantitat");
+
 
 function afegirComanda(res_bus) {
   const object = Array_Medicamentos[res_bus];

@@ -10,9 +10,12 @@ const preu = document.getElementById("preu");
 const quantitat = document.getElementById("quantitat");
 const lol = document.getElementById("lol");
 
+const most = document.getElementById("most");
+
 newRegister.addEventListener("submit", NewMedicines);
 
 let Array_Medicamentos = [];
+let Array_id = [];
 
 GetMedicines();
 
@@ -50,6 +53,7 @@ function GetMedicines() {
     .then((data) => {
       data.forEach((element) => {
         Array_Medicamentos.push(element);
+        Array_id.push(element.id);
       });
       carregarTaula(Array_Medicamentos);
     });
@@ -86,16 +90,40 @@ function eliminarMedicament(id) {
 
 console.log(Array_Medicamentos);
 
+function cancelaEdit() {
+  most.innerHTML += "";
+}
+
+function edit(id) {
+  const pos = Array_id.indexOf(id);
+  const ob = Array_Medicamentos[pos];
+  const mod_name = ob.name;
+
+  most.innerHTML += `
+  <div>
+   <h1>Estas modifican el medicament ${mod_name}</h1>
+   <input type="button" class="btn btn-danger btn-sm" onclick="cancelaEdit('${id}');" value="Cancelar modificar el medicament">
+  </div>
+`;
+}
+
 function carregarTaula(comanda) {
   let html = comanda.map(generarHtmlRegistroPersona).join("");
 
   registros.innerHTML = html;
 
   function generarHtmlRegistroPersona(index) {
+    console.log(index);
+
     return `<tr>
   <td>${index.name}</td>
   <td>${index.des}</td>
-  <td><input type="button" class="btn btn-danger btn-sm" onclick="eliminarMedicament('${index.id}');" value="Afegira a la comanda"></td>
+  <td>${index.colum}</td>
+  <td>${index.row}</td>
+  <td>${index.amount}</td>
+  <td>${index.price} €</td>
+  <td><input type="button" class="btn btn-danger btn-sm" onclick="edit('${index.id}');" value="Editar medicament"></td>
+  <td><input type="button" class="btn btn-danger btn-sm" onclick="eliminarMedicament('${index.id}');" value="Eliminar de base de dades"></td>
 </tr>`;
   }
 }

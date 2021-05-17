@@ -45,6 +45,10 @@
     </nav>
   </head>
   <body>
+
+
+
+    
     <h1>Realitza una comanda</h1>
 
     <div class="body2">
@@ -54,7 +58,7 @@
             <form autocomplete="off" action="/action_page.php">
               <div class="autocompletado" style="width: 300px">
                 <input
-                  class="form-control mb-4"
+                  class="form-control mb-4 mr-0"
                   id="marcas"
                   type="text"
                   name="Marcas"
@@ -67,19 +71,20 @@
             </button>
           </div>
         </div>
-
-        <div class="col-md-6" id="most"></div>
-        <input
+        
+       <input
           type="text"
           id="quantitat"
           class="form-control mb-4"
           placeholder="Quantitat predetirminada 1"
           required
         />
+        <div class="col-md-6" id="most"></div>
+ 
       </div>
       <div class="taula">
         <div class="quadrat">
-          <div class="conttaula">
+       
             <div class="espaiat"></div>
             <table class="table table-striped table-hover" style="width: 100%">
               <tr>
@@ -90,7 +95,7 @@
               </tr>
               <tbody id="registros"></tbody>
             </table>
-          </div>
+          
           <div class="borde">
             <div class="btnborder">
               <input

@@ -30,7 +30,6 @@
   "dependencies": {
     "electron-fetch": "^1.7.3",
     "electron-reload": "^1.5.0",
-    "mdb-ui-kit": "^3.3.0",
-    "nedb": "^1.8.0"
+    "mdb-ui-kit": "^3.3.0"
   }
 }

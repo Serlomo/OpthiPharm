@@ -41,6 +41,8 @@
   </head>
   <body>
     <h1>Registra medicaments a la base de dades</h1>
+    
+    <div class="col-md-6" id="most"></div>
 
     <form id="new" class="border border-light p-4">
       <p class="h3 mb-4 text-left">Nou Medicament</p>
@@ -102,17 +104,19 @@
       </button>
     </form>
 
-     <table class="table">
+     <table class="table table-striped p-4">
             <thead>
               <tr>
                 <th>Nombre</th>
                 <th>Descripcio</th>
                 <th>Columna</th>
                 <th>Fila</th>
+                 <th>Quantitat</th>
+                  <th>Preu unitari</th>
                 <th>Eliminar</th>
               </tr>
             </thead>
-            <tbody id="registros"></tbody>
+            <tbody class="border border-light p-4" id="registros"></tbody>
           </table>
         </div>
 

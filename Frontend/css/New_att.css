@@ -147,13 +147,6 @@
    flex-wrap:nowrap;
 
   }
-  .espaiat{
-    width:24%;
-    height:24px;
-    border-top-left-radius: 20px;
-    background-color: white;
-    border-bottom:1px solid black;
-  }
 /*MEDIA QUERIES*___________________________________________________________________________________/
   
 /*Si pantalla més gran de 600px*/
@@ -175,7 +168,7 @@
     div.sb{
       display:flex;
       width:177px;
-      margin-left:15%;
+      margin-left:5%;
       text-align:center;
     }
     .img{
@@ -285,12 +278,12 @@
   }  
  
   @media screen and (max-width: 300px){
-    .btn{
+    /* .btn{
       height:100%;
       max-width:50px;
       text-align:center;
       font-size:10px;
-    }
+    } */
   }
 
   .botocarta{

@@ -72,4 +72,42 @@ app.put("/amount-update", function (req, res) {
   res.send("Actualizado");
 });
 
+app.put("/update-doc", function (req, res) {
+  const id = req.body.id;
+  const update = {};
+
+  const amount = req.body.amount;
+  const name = req.body.name;
+  const des = req.body.des;
+  const colum = req.body.colum;
+  const row = req.body.row;
+  const price = req.body.price;
+
+  if (amount !== "") {
+    update.amount = amount;
+  }
+
+  if (name !== "") {
+    update.name = name;
+  }
+  if (des !== "") {
+    update.des = des;
+  }
+  if (colum !== "") {
+    update.colum = colum;
+  }
+  if (row !== "") {
+    update.row = row;
+  }
+  if (price !== "") {
+    update.price = price;
+  }
+
+  console.log(update);
+
+  db.ref("medicines/" + id).update(update);
+
+  res.send("Actualizado");
+});
+
 module.exports = app;
