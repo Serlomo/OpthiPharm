@@ -2,7 +2,6 @@
 
 ### Index
 - Agenda de tasques.
-- Iniciar el programa.
 - Iniciar el programa desprès de fer tota l'instal·lació
 - Iniciar el programa
 - Documentació

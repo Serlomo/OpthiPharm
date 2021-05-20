@@ -1,3 +1,8 @@
+const API_DEV = "http://localhost:3001";
+const API_PRO = "http://192.168.50.109:3001";
+
+const API_DIRECTION = API_DEV;
+
 const most = document.getElementById("most");
 const btnBus = document.getElementById("btn-bus");
 const registros = document.querySelector("#registros");
@@ -133,6 +138,7 @@ function borraBusqueda() {
 let comanda = [];
 let id_rep = [];
 
+let total = 0;
 
 function afegirComanda(res_bus) {
   const object = Array_Medicamentos[res_bus];
@@ -145,6 +151,9 @@ function afegirComanda(res_bus) {
 
   object.quantitat = pre;
   console.log(object);
+
+  const price = object.price;
+  total = pre * price;
 
   const rep = id_rep.includes(object.id);
 
@@ -169,6 +178,7 @@ function carregarTaula(comanda) {
   <td>${index.name}</td>
   <td>${index.quantitat}</td>
   <td>${index.price}</td>
+  <td>${total}</td>
   <td><input type="button" class="btn btn-danger btn-sm" onclick="eliminarComanda('${index.id}');" value="Eliminar de la comanda"></td>
 </tr>`;
   }

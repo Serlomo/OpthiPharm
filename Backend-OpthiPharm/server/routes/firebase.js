@@ -60,7 +60,7 @@ app.get("/get-medicines", function (req, res) {
 app.delete("/delete-medicines", function (req, res) {
   console.log(req.body.id);
   db.ref("medicines/" + req.body.id).remove();
-  res.send("deleted");
+  res.send({ ok: true, delete: true });
 });
 
 //PUT per cambiar el contador dels medicaments de la base de dades.
@@ -69,7 +69,7 @@ app.put("/amount-update", function (req, res) {
   const amount = req.body.amount;
 
   db.ref("medicines/" + id).update({ amount: amount });
-  res.send("Actualizado");
+  res.send({ ok: true, update: true });
 });
 
 app.put("/update-doc", function (req, res) {
@@ -107,7 +107,7 @@ app.put("/update-doc", function (req, res) {
 
   db.ref("medicines/" + id).update(update);
 
-  res.send("Actualizado");
+  res.send({ ok: true, update: true });
 });
 
 module.exports = app;

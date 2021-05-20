@@ -39,6 +39,7 @@
               >Registrar medicaments</a
             >
             <a class="nav-link" href="index.html">Comanda</a>
+            <a class="nav-link" href="html/state.html">Estat de la maquina</a>
           </div>
         </div>
       </div>
@@ -46,57 +47,50 @@
   </head>
   <body>
 
-
-
-    
     <h1>Realitza una comanda</h1>
 
     <div class="body2">
       <div class="sota">
-        <div class="g">
-          <div class="sb">
+      <div class="body2 p-2">
             <form autocomplete="off" action="/action_page.php">
               <div class="autocompletado" style="width: 300px">
+              <div class="form-outline">
                 <input
-                  class="form-control mb-4 mr-0"
+                  class="form-control"
                   id="marcas"
                   type="text"
                   name="Marcas"
                   placeholder="Buscar un medicaments"
                 />
               </div>
+              </div>
             </form>
-            <button id="btn-bus" class="btn btn-outline-success" type="submit">
+            <button id="btn-bus" class="btn btn-primary" type="submit">
               Search
             </button>
           </div>
-        </div>
-        
        <input
           type="text"
           id="quantitat"
           class="form-control mb-4"
           placeholder="Quantitat predetirminada 1"
-          required
         />
         <div class="col-md-6" id="most"></div>
  
       </div>
       <div class="taula">
-        <div class="quadrat">
-       
-            <div class="espaiat"></div>
-            <table class="table table-striped table-hover" style="width: 100%">
+            <table class="table table-dark table-striped" style="width: 100%">
               <tr>
                 <th>Producte</th>
                 <th>Quantitat</th>
                 <th>Preu</th>
+                <th>Preu total unitari</th>
                 <th>Eliminar</th>
               </tr>
               <tbody id="registros"></tbody>
             </table>
           
-          <div class="borde">
+         
             <div class="btnborder">
               <input
                 id="btn-comanda"
@@ -105,9 +99,8 @@
                 value="Realitzar comanda"
               />
             </div>
-            <div class="">"Aquí va el total"</div>
-          </div>
-        </div>
+
+        
       </div>
   
 
