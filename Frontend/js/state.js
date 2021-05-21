@@ -3,7 +3,7 @@
 const API_DEV = "http://localhost:3001";
 const API_PRO = "http://192.168.50.109:3001";
 
-const API_DIRECTION = API_DEV;
+const API_DIRECTION = API_PRO;
 
 const most = document.getElementById("most");
 
@@ -15,7 +15,7 @@ GetMedicines();
 function GetMedicines() {
   console.log("hola");
   Array_Medicamentos = [];
-  fetch("http://localhost:3001/get-medicines", {
+  fetch(`${API_DIRECTION}/get-medicines`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

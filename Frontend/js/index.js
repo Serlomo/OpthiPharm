@@ -1,7 +1,7 @@
 const API_DEV = "http://localhost:3001";
 const API_PRO = "http://192.168.50.109:3001";
 
-const API_DIRECTION = API_DEV;
+const API_DIRECTION = API_PRO;
 
 const most = document.getElementById("most");
 const btnBus = document.getElementById("btn-bus");
@@ -17,7 +17,7 @@ GetMedicaments();
 function GetMedicaments() {
   console.log("hola");
 
-  fetch("http://localhost:3001/get-medicines", {
+  fetch(`${API_DIRECTION}/get-medicines`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -230,7 +230,7 @@ function executarComanda() {
     }
   });
 
-  fetch("http://localhost:3001/comanda", {
+  fetch(`${API_DIRECTION}/comanda`, {
     method: "POST",
     body: JSON.stringify({
       row: ArrayRow,

@@ -1,10 +1,10 @@
 //DOM Elements
 const API_DEV = "http://localhost:3001";
-const API_PRO = "http://192.168.50.109:3001";
+const API_PRO = "http://192.168.50.52:3001";
 
-const API_DIRECTION = API_DEV;
+const API_DIRECTION = API_PRO;
 
-const newRegister = document.getElementById("new");
+const newRegister = document.getElementById("btnCrearRegistro");
 const registros = document.getElementById("registros");
 const name_ = document.getElementById("name");
 const des = document.getElementById("des");
@@ -16,7 +16,9 @@ const lol = document.getElementById("lol");
 
 const most = document.getElementById("most");
 
-newRegister.addEventListener("submit", NewMedicines);
+// const p = document.getElementById("btnNEW");
+
+newRegister.addEventListener("click", NewMedicines);
 
 let Array_Medicamentos = [];
 let Array_id = [];
@@ -24,6 +26,7 @@ let Array_id = [];
 GetMedicines();
 
 function NewMedicines() {
+  console.log("Hola");
   fetch(`${API_DIRECTION}/new-medicine`, {
     method: "POST",
     body: JSON.stringify({
@@ -39,7 +42,12 @@ function NewMedicines() {
     },
   })
     .then((res) => res.json())
-    .then((data) => console.log(data));
+    .then((data) => {
+      console.log(data);
+    });
+  Array_Medicamentos = [];
+  GetMedicines();
+  carregarTaula(Array_Medicamentos);
 }
 
 function GetMedicines() {
@@ -128,8 +136,9 @@ function update(id) {
   })
     .then((res) => res.json())
     .then((data) => console.log(data));
-
-  carregarTaula(comanda);
+  Array_Medicamentos = [];
+  GetMedicines();
+  carregarTaula(Array_Medicamentos);
 }
 
 function cancelaEdit() {
