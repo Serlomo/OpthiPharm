@@ -16,7 +16,7 @@
       <link rel ="stylesheet" href="css/New_att.css">
 
     <title>Opthi-Pharm</title>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-darck">
       <div class="container-fluid">
         <img src="assets/logo.png" alt="" width="100" height="50" />
         <button
@@ -33,75 +33,101 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a
-              class="nav-link active"
+              class="nav-link active text-light"
               aria-current="page"
               href="html/register.html"
               >Registrar medicaments</a
             >
-            <a class="nav-link" href="index.html">Comanda</a>
-            <a class="nav-link" href="html/state.html">Estat de la maquina</a>
+            <a class="nav-link text-light" href="index.html">Comanda</a>
+            <a class="nav-link text-light" href="html/state.html">Estat de la maquina</a>
           </div>
         </div>
       </div>
     </nav>
   </head>
-  <body>
+  <body class="bg-dark">
 
-    <h1>Realitza una comanda</h1>
+  <div class="container-fluid">
+   <h1 class="text-light p-2">Realitza una comanda</h1>
+    <div class="row">
+    <!--columna esquerra-->
+    <div class="col-12 col-lg-6 ">
 
-    <div class="body2">
-      <div class="sota">
-      <div class="body2 p-2">
-            <form autocomplete="off" action="/action_page.php">
-              <div class="autocompletado" style="width: 300px">
-              <div class="form-outline">
-                <input
-                  class="form-control"
+      <div class="row justify-content-center">
+    <!--Part Esquerra-->
+       <div class="col-5 col-lg-5 ">
+         <form autocomplete="off" action="/action_page.php" class="d-flex">
+            <div class="autocompletado" style="width: 300px">
+               <div class="form-outline">
+                 <input
+                  class="form-control w-100"
                   id="marcas"
                   type="text"
                   name="Marcas"
                   placeholder="Buscar un medicaments"
-                />
-              </div>
-              </div>
-            </form>
-            <button id="btn-bus" class="btn btn-primary" type="submit">
-              Search
-            </button>
-          </div>
-       <input
+                  aria-label="Search"
+                 />
+               </div>
+             </div>
+         </form>
+      </div>
+      <!--Part Dreta-->
+      <div class="col-3 col-lg-7">
+       <button id="btn-bus" class="btn btn-outline-success" type="submit">
+         Search
+       </button>
+     </div>
+   
+   <div class="row justify-content-center">
+      <div class="col-md-6 col-ld-6 col-6" id="most">
+       <div class="card">
+       <h5 class="card-title">Buscar un medicament per poder afegir a la comanda</h5> 
+       </div>
+     </div>
+
+   <div class="col-3 col-lg-6">
+     <input
           type="text"
           id="quantitat"
           class="form-control mb-4"
           placeholder="Quantitat predetirminada 1"
         />
-        <div class="col-md-6" id="most"></div>
- 
-      </div>
-      <div class="taula">
-            <table class="table table-dark table-striped" style="width: 100%">
+        </div>
+  </div>
+
+   </div>
+   </div>
+
+    <!--columna dreta-->
+    <div class="col-8 col-lg-6 ">
+     
+            <table class="table " style="width: 100%">
               <tr>
-                <th>Producte</th>
-                <th>Quantitat</th>
-                <th>Preu</th>
-                <th>Preu total unitari</th>
-                <th>Eliminar</th>
+                <th class="text-light">Producte</th>
+                <th class="text-light">Quantitat</th>
+                <th class="text-light">Preu</th>
+                <th class="text-light">Preu total unitari</th>
+                <th class="text-light">Eliminar</th>
               </tr>
               <tbody id="registros"></tbody>
             </table>
-          
-         
-            <div class="btnborder">
+
               <input
                 id="btn-comanda"
                 type="button"
                 class="btn btn-danger btn-sm"
                 value="Realitzar comanda"
               />
-            </div>
 
+         </div>
+
+      
+
+   
         
-      </div>
+ 
+     
+      
   
 
     <script type="text/javascript" src="js/index.js"></script>

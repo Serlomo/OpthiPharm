@@ -1,7 +1,7 @@
 const API_DEV = "http://localhost:3001";
 const API_PRO = "http://192.168.50.109:3001";
 
-const API_DIRECTION = API_PRO;
+const API_DIRECTION = API_DEV;
 
 const most = document.getElementById("most");
 const btnBus = document.getElementById("btn-bus");
@@ -50,7 +50,7 @@ function autocomplete(inp, arr) {
     currentFocus = -1;
     a = document.createElement("DIV");
     a.setAttribute("id", this.id + "autocomplete-list");
-    a.setAttribute("class", "autocomplete-items");
+    a.setAttribute("class", "autocomplete-items text-light p-2");
     this.parentNode.appendChild(a);
     for (i = 0; i < arr.length; i++) {
       if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
@@ -175,11 +175,11 @@ function carregarTaula(comanda) {
 
   function generarHtmlRegistroPersona(index) {
     return `<tr>
-  <td>${index.name}</td>
-  <td>${index.quantitat}</td>
-  <td>${index.price}</td>
-  <td>${total}</td>
-  <td><input type="button" class="btn btn-danger btn-sm" onclick="eliminarComanda('${index.id}');" value="Eliminar de la comanda"></td>
+  <td class="text-light">${index.name}</td>
+  <td class="text-light">${index.quantitat}</td>
+  <td class="text-light">${index.price}€</td>
+  <td class="text-light">${total}€</td>
+  <td class="text-light"><input type="button" class="btn btn-danger btn-sm" onclick="eliminarComanda('${index.id}');" value="Eliminar de la comanda"></td>
 </tr>`;
   }
 }
