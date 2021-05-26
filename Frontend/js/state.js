@@ -1,7 +1,7 @@
 //DOM Elements
 
 const API_DEV = "http://localhost:3001";
-const API_PRO = "http://192.168.50.109:3001";
+const API_PRO = "http://192.168.50.52:3001";
 
 const API_DIRECTION = API_PRO;
 
@@ -43,8 +43,10 @@ function state() {
   most.innerHTML = "";
 
   most.innerHTML += `
-  <div>
-   <h1>La Base de dades i el back-end estan operatius</h1>
+  <div class="row">
+    <div class="col-5"><h3>La Base de dades i el back-end estan operatius</h3></div>
+    <div class="col-5 card bg-success">
+    </div>
   </div>
 `;
 }
@@ -53,8 +55,10 @@ function not_oper() {
   most.innerHTML = "";
 
   most.innerHTML += `
-  <div>
-   <h1>La base de dades no esta operativa</h1>
+  <div class="row">
+  <div class="col-5"><h3>La Base de dades i el back-end estan operatius</h3></div>
+  <div class="col-5 card bg-danger">
   </div>
+</div>
 `;
 }

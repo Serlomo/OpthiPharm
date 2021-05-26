@@ -200,6 +200,20 @@ app.post("/comanda", function (req, res) {
     }
   }
 
+    //Funcio per executar les sortidas de las filas.
+    function Execut(num) {
+      const Colum_0 = Array_Final[num].Numero_0;
+      const Colum_1 = Array_Final[num].Numero_1;
+      const Colum_2 = Array_Final[num].Numero_2;
+  
+      const num_0 = 0;
+      const num_1 = 1;
+      const num_2 = 2;
+      Ex_Sortides(Colum_0, num_0, num, () => {});
+      Ex_Sortides(Colum_1, num_1, num, () => {});
+      Ex_Sortides(Colum_2, num_2, num, () => {});
+    }
+
   //Funció per avisar que la comanda ha sigut executada
   const t = max(0);
   const tm = max(1);

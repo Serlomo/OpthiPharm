@@ -1,41 +1,45 @@
-const API_DEV = "http://localhost:3001";
-const API_PRO = "http://192.168.50.109:3001";
+const API_DEV = "http://localhost:3001"; // Direcció de desarollo
+const API_PRO = "http://192.168.50.52:3001";// Direcció de producció (Rasberry Pi - Back-end).
 
-const API_DIRECTION = API_DEV;
+const API_DIRECTION = API_PRO; // Configuració d'on apuntarà el client per poder-se comunicar amb la base de dades.
 
-const most = document.getElementById("most");
-const btnBus = document.getElementById("btn-bus");
-const registros = document.querySelector("#registros");
+const targeta = document.getElementById("targeta"); //Importació de l'element targeta, on sortirà el medicament buscat.
+const spiner_ = document.getElementById("spiner"); // Importacció del element spiner, es el espiner de carrega comanda.
+const btnBus = document.getElementById("btn-bus"); // Importació de l'element btn-bus, buto de busqueda del medicament.
+const registres = document.querySelector("#registres"); // Importació de l'element registres, taula on sortira la comanda.
+const btn_comanda = document.getElementById("btn-comanda"); // Importació de l'element btn-comanda, boto per executar la comanda.
 
-const quan = document.getElementById("quantitat");
+const quan = document.getElementById("quantitat"); // Importació de l'element quantitat, és l'input que trobem per col·locar la quantitat de medicaments que volem.
 
-let Array_Medicamentos = [];
-let Array_NomMedica = [];
+let Array_Medicaments = []; // Array que s'emplena amb tots els medicaments de la base de dades.
+let Array_NomMedica = []; // Array amb només els noms dels medicaments.
 
-GetMedicaments();
+GetMedicaments(); // Executem la funció GetMedicaments per portar els medicaments de base de dades.
 
+// Funció GetMedicaments per portar els medicaments de base de dades.
 function GetMedicaments() {
-  console.log("hola");
 
+  // console.log("GetMedicaments");
+
+  //Petició GET http per obtenir els medicaments, aquesta ruta apunta a la API /get-medicines del back-end.
   fetch(`${API_DIRECTION}/get-medicines`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
-  })
-    .then((res) => res.json())
+  }) // Quan obtenim els medicaments, recorrem l'array i col·loque'm el medicament en els Arrays.
     .then((data) => {
       data.forEach((element) => {
-        Array_Medicamentos.push(element);
+        Array_Medicaments.push(element);
         Array_NomMedica.push(element.name);
       });
     });
 }
 
 //Autocompletar busquedas
+autocomplete(document.getElementById("marcas"), Array_NomMedica); //Obtenim el id.
 
-var marcas = Array_NomMedica;
-
+//Funció  per autocompletar busquedas. 
 function autocomplete(inp, arr) {
   var currentFocus;
   inp.addEventListener("input", function (e) {
@@ -107,16 +111,19 @@ function autocomplete(inp, arr) {
     }
   }
 
-  btnBus.addEventListener("click", searchArray);
+  ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  btnBus.addEventListener("click", searchArray); //Quan fan clic en el botó btnBus (Cerca)
+
+  // Funció per mostra la cerca del medicament en una targeta.
   function searchArray() {
     console.log("hola");
     const res_bus = Array_NomMedica.indexOf(inp.value);
     if (res_bus != -1) {
-      const object = Array_Medicamentos[res_bus];
-      most.innerHTML = "";
+      const object = Array_Medicaments[res_bus];
+      targeta.innerHTML = "";
 
-      most.innerHTML += `<div class="card" >
+      targeta.innerHTML += `<div class="card" >
       <div class="card-header">
       ${object.name}
     </div>
@@ -131,17 +138,17 @@ function autocomplete(inp, arr) {
   }
 }
 
+//Funció per borrar la tarjeta de la cerca.
 function borraBusqueda() {
-  most.innerHTML = "";
+  targeta.innerHTML = "";
 }
 
 let comanda = [];
 let id_rep = [];
 
-let total = 0;
-
+//Funció per afegir la comanda a la taula.
 function afegirComanda(res_bus) {
-  const object = Array_Medicamentos[res_bus];
+  const object = Array_Medicaments[res_bus];
 
   let pre = quan.value;
   console.log(pre);
@@ -153,8 +160,8 @@ function afegirComanda(res_bus) {
   console.log(object);
 
   const price = object.price;
-  total = pre * price;
-
+  const total = pre * price;
+  object.total = total;
   const rep = id_rep.includes(object.id);
 
   if (rep == true) {
@@ -168,22 +175,24 @@ function afegirComanda(res_bus) {
   }
 }
 
+//Funció per carregar la taula de comanda.
 function carregarTaula(comanda) {
-  let html = comanda.map(generarHtmlRegistroPersona).join("");
+  let html = comanda.map(TaulaCoamandaHtml).join("");
 
-  registros.innerHTML = html;
+  registres.innerHTML = html;
 
-  function generarHtmlRegistroPersona(index) {
+  function TaulaCoamandaHtml(index) {
     return `<tr>
   <td class="text-light">${index.name}</td>
   <td class="text-light">${index.quantitat}</td>
   <td class="text-light">${index.price}€</td>
-  <td class="text-light">${total}€</td>
+  <td class="text-light">${index.total}€</td>
   <td class="text-light"><input type="button" class="btn btn-danger btn-sm" onclick="eliminarComanda('${index.id}');" value="Eliminar de la comanda"></td>
 </tr>`;
   }
 }
 
+//Funció per eliminar un medicament de la taula de comanda.
 function eliminarComanda(index) {
   let pos_id = [];
 
@@ -201,10 +210,9 @@ function eliminarComanda(index) {
   carregarTaula(comanda);
 }
 
-const btn_comanda = document.getElementById("btn-comanda");
+btn_comanda.addEventListener("click", executarComanda); //Quan fan clic en el botó btn_comanda (Executar comanda) crida a la funció executarComanda.
 
-btn_comanda.addEventListener("click", executarComanda);
-
+//Funció per executar la comanda.
 function executarComanda() {
   let ArrayRow = [];
   let ArrayColum = [];
@@ -230,6 +238,8 @@ function executarComanda() {
     }
   });
 
+  on_spiner();
+
   fetch(`${API_DIRECTION}/comanda`, {
     method: "POST",
     body: JSON.stringify({
@@ -252,9 +262,25 @@ function executarComanda() {
     headers: {
       "Content-Type": "application/json",
     },
-  })
-    .then((res) => res.json())
-    .then((data) => console.log(data));
+  }).then((data) => {
+    if (data.ok === true) {
+      off_spiner();
+    }
+  });
 }
 
-autocomplete(document.getElementById("marcas"), marcas);
+//Funció per activar el spiner de càrrega. 
+function off_spiner() {
+  spiner_.innerHTML += "";
+}
+
+//Funció per activar el spiner de càrrega.
+function on_spiner() {
+  spiner_.innerHTML += `
+  <div class="spinner-border text-light" role="status">
+  <span class="visually-hidden">Loading...</span>
+ </div>
+  `;
+}
+
+

@@ -30,10 +30,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
+          <a class="nav-link" href="../index.html">Comanda</a>
             <a class="nav-link active" aria-current="page" href="register.html"
               >Registrar medicaments</a
             >
-            <a class="nav-link" href="../index.html">Comanda</a>
+            
             <a class="nav-link" href="state.html">Estat de la maquina</a>
           </div>
         </div>
@@ -41,6 +42,8 @@
     </nav>
   </head>
   <body>
+
+  <div class="container-fluid">
     <h1>Registra medicaments a la base de dades</h1>
     
     <div class="col-md-6" id="most"></div>
@@ -107,8 +110,8 @@
      <table class="table table-striped p-4">
             <thead>
               <tr>
-                <th>Nombre</th>
-                <th>Descripcio</th>
+                <th>Nom</th>
+                <th>Descripció</th>
                 <th>Columna</th>
                 <th>Fila</th>
                 <th>Quantitat</th>
@@ -119,6 +122,8 @@
             <tbody class="border border-light p-4" id="registros"></tbody>
           </table>
         </div>
+
+    </div>
 
 
         <script type="text/javascript" src="../js/register.js"></script>

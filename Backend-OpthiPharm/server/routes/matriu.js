@@ -1,3 +1,8 @@
+////////////////////////////////////////////////////
+// Matriu que es pot provar en Windows, la matriu que esta en la rasberry pi es el archiu matriu_ras.js
+// Documentació completa en el archiu matriu:ras.js
+///////////////////////////////////////////////////
+
 const express = require("express");
 const app = express();
 
@@ -21,7 +26,7 @@ app.post("/comanda", function (req, res) {
   }
 
   let Rep = { Numero_0: 0, Numero_1: 0, Numero_2: 0 };
-  let Array_Final = [];
+  let Array_Final = []; 
 
   for (let index = 0; index < Array_row.length; index++) {
     Rep = { Numero_0: 0, Numero_1: 0, Numero_2: 0 };
@@ -120,7 +125,7 @@ app.post("/comanda", function (req, res) {
       row_2();
     }
 
-    //Diferentas ocions que ens podrem trobar
+    //Diferentas opcions que ens podrem trobar
     function row_1() {
       clearInterval(id_0);
       Execut(1);

@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require("express"); //Importar express
 const app = express();
 
 const admin = require("firebase-admin"); //Importar el paquet de Firebase.
@@ -12,12 +12,13 @@ admin.initializeApp({
   databaseURL: "https://opthi-pharm-default-rtdb.firebaseio.com/",
 });
 
-//Constant que importa totes les funcions que podem fer a la db
+//Constant que importa totes les funcions que podem fer a la db.
 const db = admin.database();
 
 //Post Crear una nova medicina
 app.post("/new-medicine", function (req, res) {
   console.log(req.body);
+  //Objecta amb els paramentres que s'enviaran a la base de dades, que els rebem per req.
   const newMedicine = {
     name: req.body.name,
     row: req.body.row,
@@ -34,7 +35,7 @@ app.post("/new-medicine", function (req, res) {
 
 //GET obtenir totes les medicines que hi ha en la base de dades.
 app.get("/get-medicines", function (req, res) {
-  let Array_data = [];
+  let Array_data = []; 
 
   db.ref("medicines").once("value", (snapshot) => {
     data = snapshot.forEach((element) => {
@@ -83,10 +84,11 @@ app.put("/update-doc", function (req, res) {
   const row = req.body.row;
   const price = req.body.price;
 
+  //Comprovem quins paramentres estan omplerts i els substiturem. (Aquesta funcio es podria fer amb un for,
+  // no es pot ficar els noms del paramentres, que estiguin guardats en un array)
   if (amount !== "") {
     update.amount = amount;
   }
-
   if (name !== "") {
     update.name = name;
   }
