@@ -117,12 +117,13 @@ function autocomplete(inp, arr) {
 
   // Funció per mostra la cerca del medicament en una targeta.
   function searchArray() {
-    console.log("hola");
-    const res_bus = Array_NomMedica.indexOf(inp.value);
+    //console.log("searchArray");
+    const res_bus = Array_NomMedica.indexOf(inp.value); //Fiques el valor de l'input de cerca i record l'array, per trobar si el nom existeix, si és així torna la posició, si no torna un -1 
+    //Si a trobat el medicament saltarà el filtre
     if (res_bus != -1) {
-      const object = Array_Medicaments[res_bus];
-      targeta.innerHTML = "";
-
+      const object = Array_Medicaments[res_bus]; //Traiem l'objecte que volem aconseguir partir de la posició trobada anteriorment i l'Array_Medicaments.
+      targeta.innerHTML = ""; //Borem la targeta anterior.
+      //Coloquem la targeta amb els valor del medicament.
       targeta.innerHTML += `<div class="card" >
       <div class="card-header">
       ${object.name}
@@ -148,40 +149,46 @@ let id_rep = [];
 
 //Funció per afegir la comanda a la taula.
 function afegirComanda(res_bus) {
-  const object = Array_Medicaments[res_bus];
+  const object = Array_Medicaments[res_bus]; //Donem la posició de l'Array. "La funció searchArray LINEA 121" Activació "LINEA 134".
 
-  let pre = quan.value;
-  console.log(pre);
+  let pre = quan.value; //Agafem el valor de quantitat de medicaments volem dispensar. 
+
+  // console.log(pre);
+  //Farem un filtre per sempre que no tingui res l'input afegiríem un medicament mínim "Valor predeterminat 1"
   if (pre == 0) {
     pre = 1;
   }
 
-  object.quantitat = pre;
-  console.log(object);
+  object.quantitat = pre; //Afegim la propietat quantitat a l'objecte amb el número de medicaments.
 
-  const price = object.price;
-  const total = pre * price;
-  object.total = total;
+  //console.log(object); 
+
+  const price = object.price; //traiem el valor del preu en una constant.
+  const total = pre * price; //Calculem el preu total.
+  object.total = total; //Afegim la propietat total a l'objecte el preu total unitari.
+
+ //Crem un filtre per identificar si el medicament que s'intenta afegir no està afegit amb anterioritat.
   const rep = id_rep.includes(object.id);
 
+  //Si no passa el filtre mostrarem una alerta (No fiquem l'alerta perquè el programa es bloqueja per alguna raó "està comentat ")
   if (rep == true) {
     // alert("No pot afegir dos meicaments iguals");
   } else {
-    id_rep.push(object.id);
-    comanda.push(object);
-    console.log(comanda);
-    carregarTaula(comanda);
-    console.log(id_rep);
+    id_rep.push(object.id); //Afegirem l'id en una llista que serà amb la que es compara en la LINEA 171. 
+    comanda.push(object); //Afegim l'objecta l'Array comanda.
+   // console.log(comanda);
+    carregarTaula(comanda); //Executem la funció carregarTaula, per actualitzar la taula amb el nou objecte dintre del array comanda. 
+   // console.log(id_rep);
   }
 }
 
 //Funció per carregar la taula de comanda.
 function carregarTaula(comanda) {
-  let html = comanda.map(TaulaCoamandaHtml).join("");
+  let html = comanda.map(TaulaCoamandaHtml).join(""); //Recorrem el array comanda, criden cada cop a la funció TaulaComandaHtml i l'encadena'm.
 
-  registres.innerHTML = html;
+  registres.innerHTML = html; //col·loque'm a registres el codi HTML generat amb la funció anterior LINEA 187.
 
-  function TaulaCoamandaHtml(index) {
+  function TaulaCoamandaHtml(index) { //Funció per genera el HTML.
     return `<tr>
   <td class="text-light">${index.name}</td>
   <td class="text-light">${index.quantitat}</td>
@@ -196,28 +203,32 @@ function carregarTaula(comanda) {
 function eliminarComanda(index) {
   let pos_id = [];
 
+  //Recorrem la comanda i col·loque'm tots els id en l'array declarat anteriorment en la LINEA 204.
   comanda.forEach((element) => {
     pos_id.push(element.id);
   });
-
+  //Busquem quina posició es troba.
   const pos = pos_id.indexOf(index);
-  console.log(pos);
 
+  // console.log(pos);
+  // Borarem l'objecta en l'array comanda i en l'array id_rep per deixar ficar un altre cop aquest medicament a la comanda.
   const max = pos + 1;
-  comanda.splice(pos, max);
-  id_rep.splice(pos, max);
+  comanda.splice(pos, max); //Array --> comanda.
+  id_rep.splice(pos, max); // Array --> id_rep. Comentat LINEA 170.
 
-  carregarTaula(comanda);
+  carregarTaula(comanda);//carege'm la taula amb el nou Array comanda.
 }
 
 btn_comanda.addEventListener("click", executarComanda); //Quan fan clic en el botó btn_comanda (Executar comanda) crida a la funció executarComanda.
 
 //Funció per executar la comanda.
 function executarComanda() {
-  let ArrayRow = [];
-  let ArrayColum = [];
-  console.log(comanda);
+  let ArrayRow = []; //Array amb les files que s'executaran.
+  let ArrayColum = []; //Array amb les columnes que s'executaran.
 
+  // console.log(comanda);
+
+ //Crem let globals per aquesta funció es modificarà el valor més endavant.
   let amount = "";
   let quantitat = "";
   let id = "";
@@ -230,16 +241,19 @@ function executarComanda() {
     quantitat = element.quantitat;
     id = element.id;
 
-    Stock = amount - quantitat;
+    Stock = amount - quantitat; //Calculem el Stock que quedarà.
 
+    //Recorrem els array, per poder enviar la comanda. 
     for (let index = 0; index < quantitat; index++) {
       ArrayColum.push(colum);
       ArrayRow.push(row);
     }
   });
 
+  //Activem el spiner de càrrega.
   on_spiner();
 
+  //Fem una petició http POST a la direcció /comanda, "Enviem els arrays a la rasberry pi"
   fetch(`${API_DIRECTION}/comanda`, {
     method: "POST",
     body: JSON.stringify({
@@ -250,9 +264,8 @@ function executarComanda() {
       "Content-Type": "application/json",
     },
   })
-    .then((res) => res.json())
-    .then((data) => console.log(data));
-
+    .then((data) => console.log(data)); //Mostrem la resposta per consola.
+   //Fem una petició http PUT a la direcció /amount-update, "Enviem els Stock que quedara"
   fetch("http://localhost:3001/amount-update", {
     method: "PUT",
     body: JSON.stringify({
@@ -262,7 +275,10 @@ function executarComanda() {
     headers: {
       "Content-Type": "application/json",
     },
-  }).then((data) => {
+  })
+  .then((res) => res.json())
+  .then((data) => {
+    //Quan arribi la dada farem para el spiner de càrrega
     if (data.ok === true) {
       off_spiner();
     }
