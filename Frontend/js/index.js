@@ -1,5 +1,5 @@
-const API_DEV = "http://localhost:3001"; // Direcció de desarollo
-const API_PRO = "http://192.168.50.52:3001";// Direcció de producció (Rasberry Pi - Back-end).
+const API_DEV = "http://localhost:3001"; // Direcció de proves
+const API_PRO = "http://192.168.50.52:3001"; // Direcció de producció (Rasberry Pi - Back-end).
 
 const API_DIRECTION = API_PRO; // Configuració d'on apuntarà el client per poder-se comunicar amb la base de dades.
 
@@ -18,7 +18,6 @@ GetMedicaments(); // Executem la funció GetMedicaments per portar els medicamen
 
 // Funció GetMedicaments per portar els medicaments de base de dades.
 function GetMedicaments() {
-
   // console.log("GetMedicaments");
 
   //Petició GET http per obtenir els medicaments, aquesta ruta apunta a la API /get-medicines del back-end.
@@ -39,7 +38,7 @@ function GetMedicaments() {
 //Autocompletar busquedas
 autocomplete(document.getElementById("marcas"), Array_NomMedica); //Obtenim el id.
 
-//Funció  per autocompletar busquedas. 
+//Funció  per autocompletar busquedas.
 function autocomplete(inp, arr) {
   var currentFocus;
   inp.addEventListener("input", function (e) {
@@ -118,7 +117,7 @@ function autocomplete(inp, arr) {
   // Funció per mostra la cerca del medicament en una targeta.
   function searchArray() {
     //console.log("searchArray");
-    const res_bus = Array_NomMedica.indexOf(inp.value); //Fiques el valor de l'input de cerca i record l'array, per trobar si el nom existeix, si és així torna la posició, si no torna un -1 
+    const res_bus = Array_NomMedica.indexOf(inp.value); //Fiques el valor de l'input de cerca i record l'array, per trobar si el nom existeix, si és així torna la posició, si no torna un -1
     //Si a trobat el medicament saltarà el filtre
     if (res_bus != -1) {
       const object = Array_Medicaments[res_bus]; //Traiem l'objecte que volem aconseguir partir de la posició trobada anteriorment i l'Array_Medicaments.
@@ -151,7 +150,7 @@ let id_rep = [];
 function afegirComanda(res_bus) {
   const object = Array_Medicaments[res_bus]; //Donem la posició de l'Array. "La funció searchArray LINEA 121" Activació "LINEA 134".
 
-  let pre = quan.value; //Agafem el valor de quantitat de medicaments volem dispensar. 
+  let pre = quan.value; //Agafem el valor de quantitat de medicaments volem dispensar.
 
   // console.log(pre);
   //Farem un filtre per sempre que no tingui res l'input afegiríem un medicament mínim "Valor predeterminat 1"
@@ -161,24 +160,24 @@ function afegirComanda(res_bus) {
 
   object.quantitat = pre; //Afegim la propietat quantitat a l'objecte amb el número de medicaments.
 
-  //console.log(object); 
+  //console.log(object);
 
   const price = object.price; //traiem el valor del preu en una constant.
   const total = pre * price; //Calculem el preu total.
   object.total = total; //Afegim la propietat total a l'objecte el preu total unitari.
 
- //Crem un filtre per identificar si el medicament que s'intenta afegir no està afegit amb anterioritat.
+  //Crem un filtre per identificar si el medicament que s'intenta afegir no està afegit amb anterioritat.
   const rep = id_rep.includes(object.id);
 
   //Si no passa el filtre mostrarem una alerta (No fiquem l'alerta perquè el programa es bloqueja per alguna raó "està comentat ")
   if (rep == true) {
     // alert("No pot afegir dos meicaments iguals");
   } else {
-    id_rep.push(object.id); //Afegirem l'id en una llista que serà amb la que es compara en la LINEA 171. 
+    id_rep.push(object.id); //Afegirem l'id en una llista que serà amb la que es compara en la LINEA 171.
     comanda.push(object); //Afegim l'objecta l'Array comanda.
-   // console.log(comanda);
-    carregarTaula(comanda); //Executem la funció carregarTaula, per actualitzar la taula amb el nou objecte dintre del array comanda. 
-   // console.log(id_rep);
+    // console.log(comanda);
+    carregarTaula(comanda); //Executem la funció carregarTaula, per actualitzar la taula amb el nou objecte dintre del array comanda.
+    // console.log(id_rep);
   }
 }
 
@@ -188,7 +187,8 @@ function carregarTaula(comanda) {
 
   registres.innerHTML = html; //col·loque'm a registres el codi HTML generat amb la funció anterior LINEA 187.
 
-  function TaulaCoamandaHtml(index) { //Funció per genera el HTML.
+  function TaulaCoamandaHtml(index) {
+    //Funció per genera el HTML.
     return `<tr>
   <td class="text-light">${index.name}</td>
   <td class="text-light">${index.quantitat}</td>
@@ -216,7 +216,7 @@ function eliminarComanda(index) {
   comanda.splice(pos, max); //Array --> comanda.
   id_rep.splice(pos, max); // Array --> id_rep. Comentat LINEA 170.
 
-  carregarTaula(comanda);//carege'm la taula amb el nou Array comanda.
+  carregarTaula(comanda); //carege'm la taula amb el nou Array comanda.
 }
 
 btn_comanda.addEventListener("click", executarComanda); //Quan fan clic en el botó btn_comanda (Executar comanda) crida a la funció executarComanda.
@@ -228,7 +228,7 @@ function executarComanda() {
 
   // console.log(comanda);
 
- //Crem let globals per aquesta funció es modificarà el valor més endavant.
+  //Crem let globals per aquesta funció es modificarà el valor més endavant.
   let amount = "";
   let quantitat = "";
   let id = "";
@@ -243,7 +243,7 @@ function executarComanda() {
 
     Stock = amount - quantitat; //Calculem el Stock que quedarà.
 
-    //Recorrem els array, per poder enviar la comanda. 
+    //Recorrem els array, per poder enviar la comanda.
     for (let index = 0; index < quantitat; index++) {
       ArrayColum.push(colum);
       ArrayRow.push(row);
@@ -263,9 +263,8 @@ function executarComanda() {
     headers: {
       "Content-Type": "application/json",
     },
-  })
-    .then((data) => console.log(data)); //Mostrem la resposta per consola.
-   //Fem una petició http PUT a la direcció /amount-update, "Enviem els Stock que quedara"
+  }).then((data) => console.log(data)); //Mostrem la resposta per consola.
+  //Fem una petició http PUT a la direcció /amount-update, "Enviem els Stock que quedara"
   fetch("http://localhost:3001/amount-update", {
     method: "PUT",
     body: JSON.stringify({
@@ -276,16 +275,16 @@ function executarComanda() {
       "Content-Type": "application/json",
     },
   })
-  .then((res) => res.json())
-  .then((data) => {
-    //Quan arribi la dada farem para el spiner de càrrega
-    if (data.ok === true) {
-      off_spiner();
-    }
-  });
+    .then((res) => res.json())
+    .then((data) => {
+      //Quan arribi la dada farem para el spiner de càrrega
+      if (data.ok === true) {
+        off_spiner();
+      }
+    });
 }
 
-//Funció per activar el spiner de càrrega. 
+//Funció per activar el spiner de càrrega.
 function off_spiner() {
   spiner_.innerHTML += "";
 }
@@ -298,5 +297,3 @@ function on_spiner() {
  </div>
   `;
 }
-
-
