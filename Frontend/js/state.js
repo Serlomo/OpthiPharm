@@ -1,19 +1,19 @@
-//DOM Elements
+const API_DEV = "http://localhost:3001"; // Direcció de proves
+const API_PRO = "http://192.168.50.52:3001"; // Direcció de producció (Rasberry Pi - Back-end).
 
-const API_DEV = "http://localhost:3001";
-const API_PRO = "http://192.168.50.52:3001";
+const API_DIRECTION = API_PRO; // Configuració d'on apuntarà el client per poder-se comunicar amb la base de dades.
 
-const API_DIRECTION = API_PRO;
+const est = document.getElementById("est"); //Importació de l'element targeta, on sortirà el medicament buscat.
 
-const most = document.getElementById("most");
-
-let Array_Medicamentos = [];
+let Array_Medicamentos = []; // Array que s'emplena amb tots els medicaments de la base de dades.
 let correct = false;
 
-GetMedicines();
+GetMedicines(); //Cada cop que carregem la pagina executem GetMedicines.
 
 function GetMedicines() {
-  console.log("hola");
+  // console.log("GetMedicaments");
+
+  //Petició GET http per obtenir els medicaments, aquesta ruta apunta a la API /get-medicines del back-end.
   Array_Medicamentos = [];
   fetch(`${API_DIRECTION}/get-medicines`, {
     method: "GET",
@@ -24,25 +24,28 @@ function GetMedicines() {
     .then((res) => res.json())
     .then((data) => {
       data.forEach((element) => {
-        Array_Medicamentos.push(element);
-        console.log(Array_Medicamentos.length);
+        Array_Medicamentos.push(element); //col·loque'm tot els medicaments obtinguts en l'array.
+        // console.log(Array_Medicamentos.length);
+        //Filtre: Si el array te mes posicions que 0
         if (Array_Medicamentos.length !== 0) {
-          state();
-          correct = true;
+          state(); //Executem la fucnió satate
+          correct = true; //Coloquem a la varibale correct "true".
         }
       });
     });
 }
-console.log(Array_Medicamentos);
+//console.log(Array_Medicamentos);
 
+//Filtre per veure si tenim connexió amb el back-end i la base de dades.
 if (correct == false) {
-  not_oper();
+  not_oper(); //Executar funció not_oper.
 }
 
+//Funció per mostrar que la connexió està establerta.
 function state() {
-  most.innerHTML = "";
+  est.innerHTML = ""; //Esborrem el que té la pantalla
 
-  most.innerHTML += `
+  est.innerHTML += `
   <div class="row">
     <div class="col-5"><h3>La Base de dades i el back-end estan operatius</h3></div>
     <div class="col-5 card bg-success">
@@ -51,14 +54,15 @@ function state() {
 `;
 }
 
+//Funció per mostrar que la connexió no esta estableta.
 function not_oper() {
-  most.innerHTML = "";
+  est.innerHTML = ""; //Esborrem el que té la pantalla
 
-  most.innerHTML += `
+  est.innerHTML += `
   <div class="row">
-  <div class="col-5"><h3>La Base de dades i el back-end estan operatius</h3></div>
-  <div class="col-5 card bg-danger">
+   <div class="col-5"><h3>La Base de dades i el back-end estan operatius</h3></div>
+   <div class="col-5 card bg-danger">
   </div>
-</div>
+  </div>
 `;
 }
