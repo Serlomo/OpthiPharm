@@ -8,7 +8,7 @@ let ventanaPrincipal;
 
 let menuAplicacionPlantilla = [
   {
-    // label: "",
+    label: "",
     // submenu: [
     //     {
     //         label: 'Busqueda',

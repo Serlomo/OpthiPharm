@@ -14,7 +14,7 @@
     />
 
     <title>Opthi-Pharm</title>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
       <div class="container-fluid">
         <img src="../assets/logo.png" alt="" width="100" height="50" />
         <button
@@ -30,12 +30,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-          <a class="nav-link" href="../index.html">Comanda</a>
-            <a class="nav-link active" aria-current="page" href="register.html"
-              >Registrar medicaments</a
+            <a class="nav-link text-light" href="../index.html">Comanda</a>
+            <a
+              class="nav-link active text-light"
+              aria-current="page"
+              href="register.html"
+              >Gestio de la DB</a
             >
-            
-            <a class="nav-link" href="state.html">Estat de la maquina</a>
+            <a class="nav-link text-light" href="state.html"
+              >Estat de la màquina</a
+            >
           </div>
         </div>
       </div>
@@ -44,7 +48,6 @@
   <body>
 
   <div class="container-fluid">
-    <h1>Registra medicaments a la base de dades</h1>
     
     <div class="col-md-6" id="modic"></div>
 
@@ -63,7 +66,7 @@
         type="text"
         id="des"
         class="form-control mb-4"
-        placeholder="Descrpcio del medicament"
+        placeholder="Descripció del medicament"
         Required
       />
 
@@ -71,7 +74,7 @@
         type="text"
         id="colum"
         class="form-control mb-4"
-        placeholder="Columa que sera colocat el medicament a la maquina"
+        placeholder="Columna del medicament a la màquina"
         Required
       />
 
@@ -79,7 +82,7 @@
         type="text"
         id="row"
         class="form-control mb-4"
-        placeholder="Fila que sera colocat el medicament a la maquina"
+        placeholder="Fila del medicament a la màquina"
      
       />
 
@@ -95,17 +98,19 @@
         type="text"
         id="quantitat"
         class="form-control mb-4"
-        placeholder="quantitat"
+        placeholder="Quantitat"
         Required
       />
-    </form>
-      <button
+
+        <button
         id="btnCrearRegistro"
         class="btn btn-success btn-block my-4"
         type="Fila"
       >
-        Crear
+        Crear un nou medicament
       </button>
+    </form>
+    
 
      <table class="table table-striped p-4">
             <thead>
@@ -115,7 +120,8 @@
                 <th>Columna</th>
                 <th>Fila</th>
                 <th>Quantitat</th>
-                <th>Preu unitari</th>
+                <th>Preu</th>
+                <th>Editar</th>
                 <th>Eliminar</th>
               </tr>
             </thead>

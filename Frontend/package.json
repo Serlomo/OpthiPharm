@@ -11,6 +11,9 @@
     "type": "git",
     "url": "git+https://github.com/Fhernd/Electron-Curso.git"
   },
+  "win": {
+    "icon": "./assets/icon.png"
+  },
   "keywords": [
     "electron",
     "aplicación",
