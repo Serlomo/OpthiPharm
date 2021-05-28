@@ -25,8 +25,8 @@ app.post("/comanda", function (req, res) {
   const colum_ = [Row_1_s, Row_2_s, Row_3_s];
 
   //Pins de las sortides del GPIO
-  const sortidas_row = [26, 27, 28];
-  const sortidas_colum = [14, 15, 16];
+  const sortidas_row = [16, 20, 21];
+  const sortidas_colum = [13, 19, 26];
 
   let Array_row = []; //Array per col·locar les files en ordre
 
@@ -96,15 +96,15 @@ app.post("/comanda", function (req, res) {
       //Fiquem les sortides que volem activar en les variables.
       Colum = row_[row];
       Row = colum_[colum];
-      //Activem las sortides seleccionades  (GPIO)
-      Colum.writeSync(1);
-      Row.writeSync(1);
+      //Activem las sortides seleccionades (GPIO)
+      Colum.writeSync(0);
+      Row.writeSync(0);
       //Fem que les sortides estiguin activades un temps determinat.
       setInterval(des, Interval_Sortida_Activada);
       //Funció per desactivar les sortides.
       function des() {
-        Colum.writeSync(0);
-        Row.writeSync(0);
+        Colum.writeSync(1);
+        Row.writeSync(1);
       }
 
       //Fució que es crida cada cert temps si és que la comanda hi ha més d'una execució per columna
@@ -119,14 +119,14 @@ app.post("/comanda", function (req, res) {
           Colum = row_[row];
           Row = colum_[colum];
 
-          Colum.writeSync(1);
-          Row.writeSync(1);
+          Colum.writeSync(0);
+          Row.writeSync(0);
 
-          setInterval(des, 500);
+          setInterval(des, Interval_Sortida_Activada);
 
           function des() {
-            Colum.writeSync(0);
-            Row.writeSync(0);
+            Colum.writeSync(1);
+            Row.writeSync(1);
           }
           i_contador++;
         }
@@ -145,7 +145,7 @@ app.post("/comanda", function (req, res) {
     Array_max.push(Colum_0, Colum_1, Colum_2);
 
     const max = Math.max(...Array_max);
-    const x = max * 2000;
+    const x = max * Interval_Mateix_Calaix;
 
     console.log(x);
 
@@ -217,7 +217,7 @@ app.post("/comanda", function (req, res) {
   //Funció per avisar que la comanda ha sigut executada
   const t = max(0);
   const tm = max(1);
-  const tmp = max(0);
+  const tmp = max(2);
 
   const temps_total = t + tm + tmp;
   const id_total = setInterval(send, temps_total);

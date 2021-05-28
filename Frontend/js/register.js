@@ -1,7 +1,7 @@
 const API_DEV = "http://localhost:3001"; // Direcció de proves
 const API_PRO = "http://192.168.50.52:3001"; // Direcció de producció (Rasberry Pi - Back-end).
 
-const API_DIRECTION = API_DEV; // Configuració d'on apuntarà el client per poder-se comunicar amb la base de dades.
+const API_DIRECTION = API_PRO; // Configuració d'on apuntarà el client per poder-se comunicar amb la base de dades.
 
 const newRegister = document.getElementById("btnCrearRegistro"); //Importació de l'element btnCrearRegistro, boto per crear el medicament.
 const registros = document.getElementById("registros");

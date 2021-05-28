@@ -15,8 +15,9 @@ app.post("/comanda", function (req, res) {
   const row = req.body.row;
   const colum = req.body.colum;
 
-  const sortidas_row = [26, 27, 28];
-  const sortidas_colum = [14, 15, 16];
+  //Pins de las sortides del GPIO
+  const sortidas_row = [16, 20, 21];
+  const sortidas_colum = [13, 19, 26];
 
   let Array_row = [];
 
@@ -64,7 +65,7 @@ app.post("/comanda", function (req, res) {
       console.log("Activo la Columna: " + sortidas_colum[colum]);
 
       function hazAlert() {
-        // Cuando llegamos a 10 no se volverá a ejecutar
+        //Quan arribem al numero de vegades d'executar es parara.
         if (i_contador >= again - 1) clearInterval(id_intervalo);
         else {
           console.log("Activo la Fila: " + sortidas_row[row]);
@@ -85,7 +86,7 @@ app.post("/comanda", function (req, res) {
     Array_max.push(Colum_0, Colum_1, Colum_2);
 
     const max = Math.max(...Array_max);
-    const x = max * 2000;
+    const x = max * Interval_Mateix_Calaix;
 
     console.log(x);
 
@@ -169,7 +170,7 @@ app.post("/comanda", function (req, res) {
   //Funció per avisar que la comanda ha sigut executada
   const t = max(0);
   const tm = max(1);
-  const tmp = max(0);
+  const tmp = max(2);
 
   const temps_total = t + tm + tmp;
   const id_total = setInterval(send, temps_total);

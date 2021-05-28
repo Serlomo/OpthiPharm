@@ -3,7 +3,7 @@ const API_PRO = "http://192.168.50.52:3001"; // Direcció de producció (Rasberr
 
 const API_DIRECTION = API_PRO; // Configuració d'on apuntarà el client per poder-se comunicar amb la base de dades.
 
-const targeta = document.getElementById("targeta"); //Importació de l'element targeta, on sortirà el medicament buscat.
+const most = document.getElementById("targeta"); //Importació de l'element targeta, on sortirà el medicament buscat.
 const spiner_ = document.getElementById("spiner"); // Importacció del element spiner, es el espiner de carrega comanda.
 const btnBus = document.getElementById("btn-bus"); // Importació de l'element btn-bus, buto de busqueda del medicament.
 const registres = document.querySelector("#registres"); // Importació de l'element registres, taula on sortira la comanda.
@@ -12,7 +12,7 @@ const btn_comanda = document.getElementById("btn-comanda"); // Importació de l'
 const quan = document.getElementById("quantitat"); // Importació de l'element quantitat, és l'input que trobem per col·locar la quantitat de medicaments que volem.
 
 let Array_Medicaments = []; // Array que s'emplena amb tots els medicaments de la base de dades.
-let Array_NomMedica = []; // Array amb només els noms dels medicaments.
+let Array_NomMedica = []; // Array amb només els noms dels medicaments.;
 
 GetMedicaments(); // Executem la funció GetMedicaments per portar els medicaments de base de dades.
 
@@ -27,6 +27,7 @@ function GetMedicaments() {
       "Content-Type": "application/json",
     },
   }) // Quan obtenim els medicaments, recorrem l'array i col·loque'm el medicament en els Arrays.
+    .then((res) => res.json())
     .then((data) => {
       data.forEach((element) => {
         Array_Medicaments.push(element);
@@ -53,7 +54,7 @@ function autocomplete(inp, arr) {
     currentFocus = -1;
     a = document.createElement("DIV");
     a.setAttribute("id", this.id + "autocomplete-list");
-    a.setAttribute("class", "autocomplete-items text-light p-2");
+    a.setAttribute("class", "autocomplete-items p-2");
     this.parentNode.appendChild(a);
     for (i = 0; i < arr.length; i++) {
       if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
@@ -130,7 +131,7 @@ function autocomplete(inp, arr) {
     <h5 class="card-title"></h5> 
     <p class="card-text">${object.des}</p> 
     <h6>Preu: ${object.price} </h6> 
-     <input type="button" class="btn btn-outline-success"  onclick="afegirComanda('${res_bus}');" value="Afegira a la comanda">
+     <input type="button" class="btn btn-outline-success" onclick="afegirComanda('${res_bus}');" value="Afegira a la comanda">
      <input type="button" class="btn btn-danger btn-sm" onclick="borraBusqueda();" value="Eliminar">
      </div>
   `;
@@ -190,11 +191,11 @@ function carregarTaula(comanda) {
   function TaulaCoamandaHtml(index) {
     //Funció per genera el HTML.
     return `<tr>
-  <td class="text-light">${index.name}</td>
-  <td class="text-light">${index.quantitat}</td>
-  <td class="text-light">${index.price}€</td>
-  <td class="text-light">${index.total}€</td>
-  <td class="text-light"><input type="button" class="btn btn-danger btn-sm" onclick="eliminarComanda('${index.id}');" value="Eliminar de la comanda"></td>
+  <td>${index.name}</td>
+  <td>${index.quantitat}</td>
+  <td>${index.price}€</td>
+  <td>${index.total}€</td>
+  <td><input type="button" class="btn btn-danger btn-sm" onclick="eliminarComanda('${index.id}');" value="Eliminar de la comanda"></td>
 </tr>`;
   }
 }
@@ -251,7 +252,7 @@ function executarComanda() {
   });
 
   //Activem el spiner de càrrega.
-  on_spiner();
+  // on_spiner();
 
   //Fem una petició http POST a la direcció /comanda, "Enviem els arrays a la rasberry pi"
   fetch(`${API_DIRECTION}/comanda`, {
@@ -278,22 +279,24 @@ function executarComanda() {
     .then((res) => res.json())
     .then((data) => {
       //Quan arribi la dada farem para el spiner de càrrega
-      if (data.ok === true) {
-        off_spiner();
-      }
+
+      // off_spiner();
     });
 }
 
 //Funció per activar el spiner de càrrega.
 function off_spiner() {
-  spiner_.innerHTML += "";
+  spiner_.innerHTML += `
+  <div>
+  </div>
+  `;
 }
 
 //Funció per activar el spiner de càrrega.
 function on_spiner() {
   spiner_.innerHTML += `
-  <div class="spinner-border text-light" role="status">
+  <div class="spinner-border" role="status">
   <span class="visually-hidden">Loading...</span>
- </div>
+  </div>
   `;
 }

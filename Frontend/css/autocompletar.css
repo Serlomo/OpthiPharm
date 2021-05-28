@@ -1,0 +1,27 @@
+label{
+    font-size: 21px;
+  }
+  
+  input[type=text]{
+    padding: 10px;
+    border: none;
+    border-bottom: solid 1px grey;
+    width: 100%;
+    margin: 15px 0px;
+    font-size: 21px;
+  }
+  
+  input[type=text]:focus{
+    border-bottom: solid 3px red;
+  }
+  
+  input[type=submit]{
+    padding: 10px 15px;
+    background-color: red;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 19px;
+    display: block;
+    width: 320px;
+  }
