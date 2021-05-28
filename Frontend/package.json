@@ -1,7 +1,7 @@
 {
-  "name": "app02-gestor-personas",
+  "name": "opthi-pharm",
   "version": "1.0.0",
-  "description": "Gestor de Personas",
+  "description": "Maquina de gestio de medicaments",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -21,7 +21,7 @@
     "desktop",
     "multiplataforma"
   ],
-  "author": "John Ortiz Ordoñez",
+  "author": "Sergi L",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Fhernd/Electron-Curso/issues"

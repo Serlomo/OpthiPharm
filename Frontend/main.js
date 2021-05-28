@@ -24,6 +24,7 @@ function crearVentanaPrincipal() {
   ventanaPrincipal = new BrowserWindow({
     width: 1000,
     height: 1000,
+    icon: "./icon.ico",
     webPreferences: {
       nodeIntegration: true,
     },

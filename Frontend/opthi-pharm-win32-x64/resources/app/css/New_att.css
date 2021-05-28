@@ -1,0 +1,288 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background-color: rgb(247, 247, 247);
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding in columns */
+.row {
+  margin: 0 -5px;
+  margin-left: auto;
+  margin-top: 30px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add an active class to highlight the current page */
+.topnav a.active {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Hide the link that should open and close the topnav on small screens */
+.topnav .icon {
+  display: none;
+}
+
+.responsive {
+  width: 100%;
+  height: 100%;
+}
+.g {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+/* .btn{
+    height:100%;
+    width:100%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius:5px;
+  } */
+
+div.img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.sota {
+  width: 50%;
+}
+/*Si pantalla més gran de 600px*/
+.taula {
+  right: 0;
+  margin-top: 50px;
+  margin-right: 10px;
+  margin-left: 10px;
+  height: 400px;
+  width: 50%;
+}
+
+.quadrat {
+  height: 100%;
+  width: 100%;
+  background-color: rgb(236, 236, 236);
+  border-radius: 20px;
+  border: 2px black solid;
+}
+
+th {
+  border-right: 1px solid black;
+}
+td {
+  border: 1px solid black;
+  width: 10%;
+}
+tr {
+  border-left: 20px;
+}
+.borde {
+  margin-top: 300px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  display: flex;
+  flex-wrap: nowrap;
+}
+.btnborder {
+  height: 20px;
+  width: 80%;
+  max-height: 100%;
+}
+.btn2 {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  border-bottom-left-radius: 15px;
+  border: none;
+  background-color: black;
+  color: white;
+}
+.tcap {
+  margin-bottom: 10px;
+  font-size: 15px;
+  border-top-right-radius: 20px;
+  border-bottom: 1px solid black;
+  background-color: white;
+}
+.conttaula {
+  display: flex;
+  flex-wrap: nowrap;
+}
+/*MEDIA QUERIES*___________________________________________________________________________________/
+  
+/*Si pantalla més gran de 600px*/
+@media screen and (min-width: 601px) {
+  .topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    margin-right: 40px;
+    margin-left: 40px;
+  }
+  div.logo {
+    max-width: 150px;
+  }
+  .img {
+    max-height: 225px;
+  }
+  .column {
+    float: left;
+    width: 50%;
+    padding: 0 10px;
+    height: 100%;
+  }
+  .accesos {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-left: 15%;
+    width: 50%;
+  }
+}
+/*si pantalla més petita de 601px*/
+@media screen and (max-width: 601px) {
+  .topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 15px;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+  div.logo {
+    max-width: 120px;
+  }
+
+  div.sb {
+    display: flex;
+    width: 177px;
+    margin-left: 15%;
+    text-align: center;
+  }
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+  .accesos {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-left: 15%;
+    width: 50%;
+  }
+}
+/*Si pantalla més petita de 355px*/
+@media screen and (max-width: 355px) {
+  .topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 12px;
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+  div.logo {
+    max-width: 80px;
+  }
+  div.sb {
+    display: flex;
+    max-width: 200px;
+    margin-left: 15%;
+    text-align: center;
+  }
+  .seb {
+    max-width: 70%;
+    text-align: center;
+  }
+  .accesos {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-left: 15%;
+    width: 50%;
+  }
+}
+
+/*si pantalla més petita de 202px*/
+@media screen and (max-width: 202px) {
+  .topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 4px 6px;
+    text-decoration: none;
+    font-size: 10px;
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+  div.logo {
+    max-width: 0px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .btn {
+    height: 100%;
+    max-width: 50px;
+    text-align: center;
+    font-size: 10px;
+  }
+}
+
+.botocarta {
+  max-width: 70%;
+  margin-left: 15%;
+}
+.body2 {
+  margin: 20px;
+  display: flex;
+  flex-wrap: nowrap;
+}
