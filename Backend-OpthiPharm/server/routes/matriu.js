@@ -58,16 +58,15 @@ app.post("/comanda", function (req, res) {
 
   const Ex_Sortides = (again, colum, row) => {
     if (again != 0) {
-      // Guardamos el identificador de intervalo para luego cancelarlo. Se llamara cada segundo
+    // Guardem l'identificador d'interval per després cancel·lar-lo.
       var id_intervalo = setInterval(hazAlert, Interval_Mateix_Calaix);
-      var i_contador = 0;
-      console.log("Activo la Fila: " + sortidas_row[row]);
-      console.log("Activo la Columna: " + sortidas_colum[colum]);
+      var i_contador = 0; //Comptador per saber quantes portem executades
 
       function hazAlert() {
         //Quan arribem al numero de vegades d'executar es parara.
         if (i_contador >= again - 1) clearInterval(id_intervalo);
         else {
+          //Mostrem per la power shell quines sortides són las que san activat.
           console.log("Activo la Fila: " + sortidas_row[row]);
           console.log("Activo la Columna: " + sortidas_colum[colum]);
           i_contador++;

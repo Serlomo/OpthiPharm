@@ -1,7 +1,7 @@
 const API_DEV = "http://localhost:3001"; // Direcció de proves
 const API_PRO = "http://192.168.50.52:3001"; // Direcció de producció (Rasberry Pi - Back-end).
 
-const API_DIRECTION = API_PRO; // Configuració d'on apuntarà el client per poder-se comunicar amb la base de dades.
+const API_DIRECTION = API_DEV; // Configuració d'on apuntarà el client per poder-se comunicar amb la base de dades.
 
 const most = document.getElementById("targeta"); //Importació de l'element targeta, on sortirà el medicament buscat.
 const spiner_ = document.getElementById("spiner"); // Importacció del element spiner, es el espiner de carrega comanda.
@@ -131,8 +131,8 @@ function autocomplete(inp, arr) {
     <h5 class="card-title"></h5> 
     <p class="card-text">${object.des}</p> 
     <h6>Preu: ${object.price} </h6> 
-     <input type="button" class="btn btn-outline-success" onclick="afegirComanda('${res_bus}');" value="Afegira a la comanda">
-     <input type="button" class="btn btn-danger btn-sm" onclick="borraBusqueda();" value="Eliminar">
+     <input type="button" class="btn btn-outline-success m-2" onclick="afegirComanda('${res_bus}');" value="Afegira a la comanda">
+     <input type="button" class="btn btn-danger btn-sm m-2" onclick="borraBusqueda();" value="Eliminar">
      </div>
   `;
     }
